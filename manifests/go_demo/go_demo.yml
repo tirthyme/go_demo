@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: go-demo
+  name: go-demo
+  namespace: go-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: go-demo
+    spec:
+      containers:
+      - image: tirthyme/go_demo:1.0.0
+        name: go-demo-d4w7h
+        env:
+        - name: DB_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: go-demo-cm
+              key: host
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: go-demo-cm
+              key: dbname
+        - name: DB_PASS
+          valueFrom:
+            secretKeyRef:
+              name: mysql-pass
+              key: root_password
+        resources: {}
+status: {}

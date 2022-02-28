@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  dbname: demo
+  host: mysql.database:3306
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: go-demo-cm
+  namespace: go-demo
