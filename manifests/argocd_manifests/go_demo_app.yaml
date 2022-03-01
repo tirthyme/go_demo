@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: go-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tirthyme/go_demo
+    targetRevision: HEAD
+    path: manifests/go_demo
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: go-demo
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+
+    automated:
+      selfHeal: true
+      prune: true
